@@ -24,17 +24,22 @@ function lg_cy(){
 
   if($('#cy_u_i').length > 0){
     var cyui=$('#cy_u_i').data('ui');
-
-    $.ajax({
-        url: $$data.get("config:api") + "api/2/login/isv",
-        cache: false,
-        dataType: "jsonp",
-        jsonp: "callback",
-        data: JSON.parse(cyui),
-        success: function(datas) {
-          clearInterval(_cy_lg);
-          $$data.set("userInfo:changyan", datas);
-        }
-    });
+    console.log(cyui);
+    try{
+      $.ajax({
+          url: $$data.get("config:api") + "api/2/login/isv",
+          cache: false,
+          dataType: "jsonp",
+          jsonp: "callback",
+          data: JSON.parse(cyui),
+          success: function(datas) {
+            clearInterval(_cy_lg);
+            $$data.set("userInfo:changyan", datas);
+          }
+      });
+    }catch(ex){
+      console.log(ex);
+      clearInterval(_cy_lg);
+    }
   }
 }
